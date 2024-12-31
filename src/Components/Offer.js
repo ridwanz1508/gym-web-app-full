@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Offer() {
   return (
@@ -7,7 +8,7 @@ function Offer() {
             <h1>A BIG <span>OFFER</span> FOR THIS SUMMER</h1>
             <p className='details'>Lorm ipsum dolor sit amnt consectetur adipisicing</p>
             <div className='pr-btns'>
-                <a href='/' className='pr-btn'>JOIN NOW</a>
+                <Link to='/membership' className='pr-btn'>JOIN NOW</Link>
             </div>
         </div>
     </div>

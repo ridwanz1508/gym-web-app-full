@@ -533,7 +533,7 @@ nav .menu-btn,
             top:65px;
             left:0px;
             background-color:#000000;
-            border-bottom:4px solid #FF1414;
+            /* border-bottom:4px solid #FF1414; */
             width:100%;
             padding:0px;
             margin:0px;

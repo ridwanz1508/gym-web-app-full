@@ -1,38 +1,93 @@
-import React, {useState} from 'react';
-import logo from '../Images/logo1.png';
-import {Link} from 'react-scroll';
+import React, { useState } from 'react';
+import { Link as ScrollLink } from 'react-scroll';
+import { Link as RouterLink, useLocation } from 'react-router-dom';
+import logo from '../images/logo1.png';
 
 function Navbar() {
-    const [nav, setnav] = useState(false);
+  const [nav, setNav] = useState(false);
+  const location = useLocation(); // Mengetahui path saat ini
 
-    const changeBackground =  () => {
-        if (window.scrollY >= 50) {
-            setnav(true);
-        }
-        else {
-            setnav(false);
-        }
+  const changeBackground = () => {
+    if (window.scrollY >= 50) {
+      setNav(true);
+    } else {
+      setNav(false);
     }
-    window.addEventListener('scroll',changeBackground);
+  };
+  window.addEventListener('scroll', changeBackground);
 
-    return (
-        <nav className={nav ? "nav active" : "nav"} >
-            <Link to='main' className='logo'>
-                <img src={logo} alt='' />
-            </Link>
-            <input className='menu-btn' type='checkbox' id='menu-btn' />
-            <label className='menu-icon' for ='menu-btn'>
-                <span className='nav-icon'></span>
-            </label>
-            <ul className='menu'>
-                <li><Link to='main' smooth={true} duration={1000}>Header</Link></li>
-                <li><Link to='features' smooth={true} duration={1000}>Features</Link></li>
-                <li><Link to='offer' smooth={true} duration={1000}>Offer</Link></li>
-                <li><Link to='about' smooth={true} duration={1000}>About</Link></li>
-                <li><Link to='contact' smooth={true} duration={1000}>Contact</Link></li>
-            </ul>
-        </nav>
-    )
+  const isHomePage = location.pathname === '/'; // Mengecek apakah di halaman utama
+
+  return (
+    <nav className={nav ? 'nav active' : 'nav'}>
+      <RouterLink to="/" className="logo">
+        <img src={logo} alt="" />
+      </RouterLink>
+      <input className="menu-btn" type="checkbox" id="menu-btn" />
+      <label className="menu-icon" htmlFor="menu-btn">
+        <span className="nav-icon"></span>
+      </label>
+      <ul className="menu">
+        {isHomePage ? (
+          // Saat di halaman utama, gunakan react-scroll
+          <>
+            <li>
+              <ScrollLink to="main" smooth={true} duration={1000}>
+                Header
+              </ScrollLink>
+            </li>
+            <li>
+              <ScrollLink to="features" smooth={true} duration={1000}>
+                Features
+              </ScrollLink>
+            </li>
+            <li>
+              <ScrollLink to="offer" smooth={true} duration={1000}>
+                Offer
+              </ScrollLink>
+            </li>
+            <li>
+              <ScrollLink to="about" smooth={true} duration={1000}>
+                About
+              </ScrollLink>
+            </li>
+            <li>
+              <ScrollLink to="faq" smooth={true} duration={1000}>
+                Faq
+              </ScrollLink>
+            </li>
+            <li>
+              <ScrollLink to="footer" smooth={true} duration={1000}>
+                Contact
+              </ScrollLink>
+            </li>
+          </>
+        ) : (
+          // Saat di halaman lain, gunakan react-router-dom untuk navigasi
+          <>
+            <li>
+              <RouterLink to="/">Header</RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/">Features</RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/">Offer</RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/">About</RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/">Faq</RouterLink>
+            </li>
+            <li>
+              <RouterLink to="/">Contact</RouterLink>
+            </li>
+          </>
+        )}
+      </ul>
+    </nav>
+  );
 }
 
 export default Navbar;
